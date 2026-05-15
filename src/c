@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+
+import argparse, sys
+
+def main(bing, duckduckgo, google, verbose, yogurt, query):
+    returncode = 0
+    
+    # Do the thing
+
+    return returncode
+
+try:
+    parser = argparse.ArgumentParser(
+        prog='c',
+        description='Takes in a query and returns a URL to a search engine for your query.'
+    )
+    parser.add_argument('-b', '--bing', action='store_true', help='Calculates Bing URL.')
+    parser.add_argument('-d', '--duckduckgo', action='store_true', help='Calculates DuckDuckGo URL.')
+    parser.add_argument('-g', '--google', action='store_true', help='Calculates Google URL (default functionality).')
+    parser.add_argument('-v', '--verbose', action='store_true', help='Verbose')
+    parser.add_argument('-y', '--yogurt', action='store_true', help='Expresses opinions on Yogurt.')
+    parser.add_argument('query', help='Query you wish to ask the AI gods.')
+    args = parser.parse_args()
+
+    if __name__ == "__main__":
+        returncode = main(args.bing, args.duckduckgo, args.google, args.verbose, args.yogurt, args.query)
+
+except:
+    print("You've gone to plaid!")
+    sys.exit(1)
+sys.exit(returncode)
