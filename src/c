@@ -18,33 +18,40 @@ class ludicrousspeed:
         self._debug("Executing translation for Google.")
         if self.excludeai:
             self._debug("Ensuring AI is not used in query.")
-            print("https://google.com?udm=14&q="+self.query)
+            self._info("https://google.com?udm=14&q="+self.query)
         else:
-            print("https://google.com?q="+self.query)
+            self._info("https://google.com?q="+self.query)
         return None
 
     def _bing(self):
         self._debug("Executing translation for Bing.")
         if self.excludeai:
             self._debug("Ensuring AI is not used in query.")
-            print("https://bing.com/search?copilot=off&q="+self.query)
+            self._info("https://bing.com/search?copilot=off&q="+self.query)
         else:
-            print("https://bing.com/search?q="+self.query)
+            self._info("https://bing.com/search?q="+self.query)
         return None
 
     def _duckduckgo(self):
         self._debug("Executing translation for DuckDuckGo.")
         if self.excludeai:
             self._debug("Ensuring AI is not used in query.")
-            print("https://noai.duckduckgo.com?q="+self.query)
+            self._info("https://noai.duckduckgo.com?q="+self.query)
         else:
-            print("https://duckduckgo.com?q="+self.query)
+            self._info("https://duckduckgo.com?q="+self.query)
         return None
     
     def _debug(self, debugstring):
         if self.verbose:
             print("VERBOSE: "+debugstring)
         return None
+
+    def _info(self, infostring):
+        if self.verbose:
+            print("   INFO: "+infostring)
+        else:
+            print(infostring)
+            return None
 
     def run(self):
         flags=0
@@ -78,16 +85,18 @@ args = parser.parse_args()
 
 if __name__ == "__main__":
     if args.yogurt:
+        yogurtstring="Yogurt! Yogurt! I hate Yogurt! Even with strawberries!"
         if args.verbose: print("VERBOSE: Expressing opintions on Yogurt.")
-        print("Yogurt! Yogurt! I hate Yogurt! Even with strawberries!")
+        print("   INFO: "+yogurtstring if args.verbose else yogurtstring)
     try:
         if args.verbose: print("VERBOSE: Executing query conversion.")
         execution = ludicrousspeed(args.bing, args.duckduckgo, args.google, args.verbose, args.excludeai, args.query)
         execution.run()
 
     except:
+        plaidstring="You've gone to plaid!"
         if args.verbose: print("VERBOSE: Error occured.")
-        print("You've gone to plaid!")
+        print("   INFO: "+plaidstring if args.verbose else plaidstring)
         sys.exit(1)
 if args.verbose: print("VERBOSE: Program completed successfully, exiting.")
 sys.exit(0)
