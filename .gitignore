@@ -219,6 +219,12 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+# RPMBuild
+BUILD
+RPMS
+SRPMS
+!ludicrousspeed.spec
+
 # Ignore this
 # Ludicrous Speed, GO!
 seatbelts
