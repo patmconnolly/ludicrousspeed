@@ -1,31 +1,93 @@
 #!/usr/bin/env python3
 
 import argparse, sys
+from urllib.parse import quote_plus
 
-def main(bing, duckduckgo, google, verbose, yogurt, query):
-    returncode = 0
+class ludicrousspeed:
+    def __init__(self, bing, duckduckgo, google, verbose, excludeai, query):
+        self.verbose = verbose
+        self._debug("Parsing variables.")
+        self.bing = bing
+        self.duckduckgo = duckduckgo
+        self.google = google
+        self.excludeai = excludeai
+        self.query = quote_plus(query)
+        self._debug("Variables parsed.")
+
+    def _google(self):
+        self._debug("Executing translation for Google.")
+        if self.excludeai:
+            self._debug("Ensuring AI is not used in query.")
+            print("https://google.com?udm=14&q="+self.query)
+        else:
+            print("https://google.com?q="+self.query)
+        return None
+
+    def _bing(self):
+        self._debug("Executing translation for Bing.")
+        if self.excludeai:
+            self._debug("Ensuring AI is not used in query.")
+            print("https://bing.com/search?copilot=off&q="+self.query)
+        else:
+            print("https://bing.com/search?q="+self.query)
+        return None
+
+    def _duckduckgo(self):
+        self._debug("Executing translation for DuckDuckGo.")
+        if self.excludeai:
+            self._debug("Ensuring AI is not used in query.")
+            print("https://noai.duckduckgo.com?q="+self.query)
+        else:
+            print("https://duckduckgo.com?q="+self.query)
+        return None
     
-    # Do the thing
+    def _debug(self, debugstring):
+        if self.verbose:
+            print("VERBOSE: "+debugstring)
+        return None
 
-    return returncode
+    def run(self):
+        flags=0
+        self._debug("Checking if Bing is requested.")
+        if self.bing:
+            flags+=1
+            self._bing()
+        self._debug("Checking if DuckDuckGo is reqeusted.")
+        if self.duckduckgo:
+            flags+=1
+            self._duckduckgo()
+        # Default option
+        self._debug("Checking if Google is requested or if no other options were requested.")
+        if self.google or flags <= 0:
+            self._google()
+        self._debug("Ending program.")
+        return None
 
-try:
-    parser = argparse.ArgumentParser(
-        prog='c',
-        description='Takes in a query and returns a URL to a search engine for your query.'
-    )
-    parser.add_argument('-b', '--bing', action='store_true', help='Calculates Bing URL.')
-    parser.add_argument('-d', '--duckduckgo', action='store_true', help='Calculates DuckDuckGo URL.')
-    parser.add_argument('-g', '--google', action='store_true', help='Calculates Google URL (default functionality).')
-    parser.add_argument('-v', '--verbose', action='store_true', help='Verbose')
-    parser.add_argument('-y', '--yogurt', action='store_true', help='Expresses opinions on Yogurt.')
-    parser.add_argument('query', help='Query you wish to ask the AI gods.')
-    args = parser.parse_args()
+parser = argparse.ArgumentParser(
+    prog='c',
+    description='Takes in a query and returns a URL to a search engine for your query.'
+)
+parser.add_argument('-b', '--bing', action='store_true', help='Calculates Bing URL.')
+parser.add_argument('-d', '--duckduckgo', action='store_true', help='Calculates DuckDuckGo URL.')
+parser.add_argument('-g', '--google', action='store_true', help='Calculates Google URL (default functionality).')
+parser.add_argument('-v', '--verbose', action='store_true', help='Verbose')
+parser.add_argument('-x', '--excludeai', action='store_true', help='Exclude AI results (where applicable).')
+parser.add_argument('-y', '--yogurt', action='store_true', help='Expresses opinions on Yogurt during query.')
+parser.add_argument('query', help='Query you wish to ask the AI gods.')
+args = parser.parse_args()
 
-    if __name__ == "__main__":
-        returncode = main(args.bing, args.duckduckgo, args.google, args.verbose, args.yogurt, args.query)
+if __name__ == "__main__":
+    if args.yogurt:
+        if args.verbose: print("VERBOSE: Expressing opintions on Yogurt.")
+        print("Yogurt! Yogurt! I hate Yogurt! Even with strawberries!")
+    try:
+        if args.verbose: print("VERBOSE: Executing query conversion.")
+        execution = ludicrousspeed(args.bing, args.duckduckgo, args.google, args.verbose, args.excludeai, args.query)
+        execution.run()
 
-except:
-    print("You've gone to plaid!")
-    sys.exit(1)
-sys.exit(returncode)
+    except:
+        if args.verbose: print("VERBOSE: Error occured.")
+        print("You've gone to plaid!")
+        sys.exit(1)
+if args.verbose: print("VERBOSE: Program completed successfully, exiting.")
+sys.exit(0)
