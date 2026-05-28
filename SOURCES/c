@@ -11,7 +11,13 @@ class ludicrousspeed:
         self.duckduckgo = duckduckgo
         self.google = google
         self.excludeai = excludeai
-        self.query = quote_plus(query)
+        temp_query = ""
+        for i in range(len(query)):
+            if(i<len(query)-1):
+                temp_query+=query[i]+" "
+            else:
+                temp_query+=query[i]
+        self.query = quote_plus(temp_query)
         self._debug("Variables parsed.")
 
     def _google(self):
@@ -72,7 +78,8 @@ class ludicrousspeed:
 
 parser = argparse.ArgumentParser(
     prog='c',
-    description='Takes in a query and returns a URL to a search engine for your query.'
+    description='Takes in a query and returns a URL to a search engine for your query.',
+    usage="%(prog)s [-y] [[-bdgvx] query]"
 )
 parser.add_argument('-b', '--bing', action='store_true', help='Calculates Bing URL.')
 parser.add_argument('-d', '--duckduckgo', action='store_true', help='Calculates DuckDuckGo URL.')
@@ -80,7 +87,7 @@ parser.add_argument('-g', '--google', action='store_true', help='Calculates Goog
 parser.add_argument('-v', '--verbose', action='store_true', help='Verbose')
 parser.add_argument('-x', '--excludeai', action='store_true', help='Exclude AI results (where applicable).')
 parser.add_argument('-y', '--yogurt', action='store_true', help='Expresses opinions on Yogurt during query.')
-parser.add_argument('query', help='Query you wish to ask the AI gods.')
+parser.add_argument('query', nargs="*", help='Query you wish to ask the AI gods.')
 args = parser.parse_args()
 
 if __name__ == "__main__":
@@ -89,9 +96,15 @@ if __name__ == "__main__":
         if args.verbose: print("VERBOSE: Expressing opintions on Yogurt.")
         print("   INFO: "+yogurtstring if args.verbose else yogurtstring)
     try:
-        if args.verbose: print("VERBOSE: Executing query conversion.")
-        execution = ludicrousspeed(args.bing, args.duckduckgo, args.google, args.verbose, args.excludeai, args.query)
-        execution.run()
+        if(len(args.query)<=0 and not args.yogurt):
+            print("Requires query to be provided!")
+            parser.print_help()
+        elif(len(args.query)<=0 and args.yogurt):
+            if args.verbose: print("VERBOSE: Expressed opinions on Yogurt, no further action needed.")
+        else:
+            if args.verbose: print("VERBOSE: Executing query conversion.")
+            execution = ludicrousspeed(args.bing, args.duckduckgo, args.google, args.verbose, args.excludeai, args.query)
+            execution.run()
 
     except:
         plaidstring="You've gone to plaid!"
