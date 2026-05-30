@@ -19,16 +19,18 @@ c [-y] [[-bdgvx] query]
 Takes in a query and returns a URL to a search engine for your query.
 
 positional arguments:
-  `query`             Query you wish to ask the AI gods.
+
+- `query`             Query you wish to ask the AI gods.
 
 options:
-  `-h`, `--help`        show help message and exit
-  `-b`, `--bing`        Calculates Bing URL.
-  `-d`, `--duckduckgo`  Calculates DuckDuckGo URL.
-  `-g`, `--google`      Calculates Google URL (default functionality).
-  `-v`, `--verbose`     Verbose
-  `-x`, `--excludeai`   Exclude AI results (where applicable).
-  `-y`, `--yogurt`      Expresses opinions on Yogurt during query.
+
+- `-h`, `--help`        show help message and exit
+- `-b`, `--bing`        Calculates Bing URL.
+- `-d`, `--duckduckgo`  Calculates DuckDuckGo URL.
+- `-g`, `--google`      Calculates Google URL (default functionality).
+- `-v`, `--verbose`     Verbose
+- `-x`, `--excludeai`   Exclude AI results (where applicable).
+- `-y`, `--yogurt`      Expresses opinions on Yogurt during query.
 
 > [!TIP]
 > You can use the `-y` flag with or without a subsequent `query`.
