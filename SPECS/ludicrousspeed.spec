@@ -19,12 +19,13 @@ install -m 755 %{SOURCE0} %{buildroot}%{_bindir}/c
 %{_bindir}/c
 
 %changelog
-* Sun May 24 2026 Developer Patrick - 0.1.0
-- Initial package
+* Fri May 29 2026 Developer Patrick - 0.1.2
+- Documentation updates
+- Specfile updates.
+- Update source file to reflect standards in guide (shebang).
 * Thu May 28 2026 Developer Patrick - 0.1.1
 - Add better usage
 - Enable yogurt to be used with no query
 - Increment version
-* Fri May 29 2026 Developer Patrick - 0.1.2
-- Documentation updates
-- Specfile updates.
+* Sun May 24 2026 Developer Patrick - 0.1.0
+- Initial package
