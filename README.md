@@ -33,5 +33,7 @@ options:
 - `-y`, `--yogurt`      Expresses opinions on Yogurt during query.
 
 > [!TIP]
+>
 > You can use the `-y` flag with or without a subsequent `query`.
+>
 > If `-h` or `-y` is not used, then a `query` is required.
