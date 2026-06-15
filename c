@@ -1,4 +1,4 @@
-#!%{python3} -%{py3_shebang_flags}
+#!/usr/bin/env python3
 
 import argparse, sys
 from urllib.parse import quote_plus
