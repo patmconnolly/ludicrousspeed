@@ -11,6 +11,10 @@ Requires: python3
 %description
 A command line assistant specifically to conflict with LightSpeed Command Line Assistant
 
+%prep
+%setup -c -T
+%patchShebangs %{SOURCE0}
+
 %install
 install -d %{buildroot}%{_bindir}
 install -m 755 %{SOURCE0} %{buildroot}%{_bindir}/c
