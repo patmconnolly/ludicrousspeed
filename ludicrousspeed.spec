@@ -4,7 +4,7 @@ Release: 1%{?dist}
 Summary: Ludicrousspeed to conflict with OpenShift Lightspeed Command Line Assistant
 License: MIT
 URL: https://github.com/patmconnolly/ludicrousspeed
-Source0: SOURCES/c
+Source0: c
 Conflicts: command-line-assistant
 Requires: python3
 
