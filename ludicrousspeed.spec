@@ -7,9 +7,14 @@ URL: https://github.com/patmconnolly/ludicrousspeed
 Source0: c
 Conflicts: command-line-assistant
 Requires: python3
+BuildRequires: python3-devel
 
 %description
 A command line assistant specifically to conflict with LightSpeed Command Line Assistant
+
+%prep
+%setup -c -T
+%py3_shebang_fix %{SOURCE0}
 
 %install
 install -d %{buildroot}%{_bindir}
