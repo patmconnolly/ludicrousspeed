@@ -13,7 +13,7 @@ A command line assistant specifically to conflict with LightSpeed Command Line A
 
 %prep
 %setup -c -T
-%patchShebangs %{SOURCE0}
+%py3_shebang_fix %{SOURCE0}
 
 %install
 install -d %{buildroot}%{_bindir}
